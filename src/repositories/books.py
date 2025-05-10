@@ -3,7 +3,7 @@ from src.models.book import Book
 from src.utils.logger import Logger
 
 
-class HarryPotterRepository:
+class BooksRepository:
 
     _instance = None
     _adapter = None
@@ -12,7 +12,7 @@ class HarryPotterRepository:
     def __new__(cls, logger):
         if not cls._instance:
             cls._adapter = cls.initialize_connection()
-            cls._instance = super(HarryPotterRepository, cls).__new__(cls)
+            cls._instance = super(BooksRepository, cls).__new__(cls)
         cls._logger = logger
         return cls._instance
 
@@ -22,7 +22,7 @@ class HarryPotterRepository:
 
     @classmethod
     def get_all(cls):
-        cls._logger.info('Getting books')
+        cls._logger.info('Getting all books from repository')
         response = cls._adapter.get('/en/books')
         response = response.json()
         # cls._logger.info(f'Books: {response}')
@@ -32,4 +32,4 @@ class HarryPotterRepository:
             book['release_date'] = book['releaseDate']
             book.pop('originalTitle')
             book.pop('releaseDate')
-        return [Book(**book) for book in response]
+        return [Book(**book).model_dump() for book in response]

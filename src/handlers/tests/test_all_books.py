@@ -23,7 +23,7 @@ class TestAllBooks(unittest.TestCase):
 
     def test_failure(self):
         with patch(
-            'src.repositories.books.HarryPotterRepository.get_all',
+            'src.repositories.books.BooksRepository.get_all',
             side_effect=Exception('Error')
         ):
             response = get_all_books(None, None)

@@ -23,9 +23,9 @@ class AbstractLoggerService(abc.ABC):
 
 class Logger(AbstractLoggerService):
 
-    def __init__(self, trace_id: str = str(uuid.uuid4())):
-        self.trace_id = trace_id
-        self.logger = logging.getLogger(trace_id)
+    def __init__(self, trace_id: str = None):
+        self.trace_id = trace_id or str(uuid.uuid4())
+        self.logger = logging.getLogger(self.trace_id)
         self.logger.setLevel(logging.INFO)
         if not self.logger.hasHandlers():
             handler = logging.StreamHandler()

@@ -1,4 +1,4 @@
-from src.repositories.books import HarryPotterRepository
+from src.repositories.books import BooksRepository
 from src.utils.logger import Logger
 
 
@@ -6,7 +6,7 @@ class BooksController:
 
     def __init__(
         self,
-        books_repository: HarryPotterRepository,
+        books_repository: BooksRepository,
         logger: Logger
     ):
         self.__books_repository = books_repository
