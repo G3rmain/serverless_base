@@ -1,19 +1,17 @@
 # decorator lambda api gateway uath
 from functools import wraps
 from src.utils.logger import Logger
-import uuid
 
 
 def lambda_handler(func):
     @wraps(func)
     def wrapper(event, context):
-        trace_id = str(uuid.uuid4())
-        logger = Logger(trace_id)
-        logger.info('Event: ', event)
-        logger.info('Context: ', context)
+        logger = Logger()
+        logger.info(f'Event: {event}')
+        logger.info(f'Context: {context}')
         try:
             function_response = func(event, context, logger)
-            logger.info('Function Response: ', function_response)
+            # logger.info(f'Function Response: {function_response}')
             if (
                 isinstance(function_response, dict) and
                 'statusCode' in function_response and
@@ -26,7 +24,7 @@ def lambda_handler(func):
                     'body': function_response
                 }
         except Exception as e:
-            logger.error('Function Error: ', str(e))
+            logger.error(f'Function Error: {str(e)}')
             return {
                 'statusCode': 500,
                 'body': str(e)

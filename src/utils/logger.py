@@ -1,5 +1,6 @@
 import logging
 import abc
+import uuid
 
 
 class AbstractLoggerService(abc.ABC):
@@ -21,7 +22,8 @@ class AbstractLoggerService(abc.ABC):
 
 
 class Logger(AbstractLoggerService):
-    def __init__(self, trace_id: str):
+
+    def __init__(self, trace_id: str = str(uuid.uuid4())):
         self.trace_id = trace_id
         self.logger = logging.getLogger(trace_id)
         self.logger.setLevel(logging.INFO)
@@ -47,4 +49,4 @@ class Logger(AbstractLoggerService):
         self.logger.exception(self._format(message, kwargs))
 
     def _format(self, message: str, data: dict):
-        return f"[TraceID: {self.trace_id}] {message} | Extra: {data if data else ''}"
+        return f"[{self.trace_id}] {message}"

@@ -4,14 +4,13 @@ from src.utils.aws_lambda import lambda_handler
 
 
 @lambda_handler
-def get_all_books(event, context):
-    repository = HarryPotterRepository()
-    controller = BooksController(repository)
+def get_all_books(event, context, logger):
+    repository = HarryPotterRepository(logger)
+    controller = BooksController(repository, logger)
     response = controller.get_books()
     return {
         'statusCode': 200,
-        'body': [book.dict() for book in response]
+        'body': [book.model_dump() for book in response]
     }
 
 
-get_all_books(None, None)

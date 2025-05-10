@@ -16,11 +16,6 @@ def mock_load_secrets(self):
 
 class TestAllBooks(unittest.TestCase):
 
-    def setUp(self):
-        # Mock secrets
-        SecretsSingleton.load_secrets = Mock()
-        SecretsSingleton.load_secrets.side_effect = mock_load_secrets
-
     def test_success(self):
         response = get_all_books(None, None)
         self.assertEqual(response['statusCode'], 200)
