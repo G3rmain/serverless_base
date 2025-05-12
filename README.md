@@ -95,3 +95,4 @@ BUCKET_NAME=your-bucket-name
 ```
 
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/G3rmain/serverless_base)
