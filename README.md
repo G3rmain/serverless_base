@@ -40,15 +40,18 @@ La importación de módulos debe realizarse de la siguiente manera:
 Por ejemplo:
 
 ```python
+# Importaciones de módulos internos
 from src.adapters import APIAdapter
 from src.controllers import Controller
 from src.repositories import Repository
 from src.utils import Utils
 from src.utils import SecretsSingleton
 
+# Importaciones de módulos externos
 from pandas import DataFrame
 from pandas import read_csv
 
+# Importaciones de módulos python
 from datetime import datetime
 from datetime import timedelta
 ```
